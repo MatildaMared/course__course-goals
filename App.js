@@ -14,6 +14,12 @@ export default function App() {
 		setGoals((currentGoals) => [...currentGoals, newGoal]);
 	}
 
+	function deleteGoalHandler(goalId) {
+		setGoals((currentGoals) => {
+			return currentGoals.filter((goal) => goal.id !== goalId);
+		});
+	}
+
 	return (
 		<View style={styles.appContainer}>
 			<GoalInput addGoal={addGoalHandler} />
@@ -23,7 +29,7 @@ export default function App() {
 					data={goals}
 					renderItem={(itemData) => {
 						const goal = itemData.item;
-						return <GoalItem goal={goal} />;
+						return <GoalItem deleteGoal={deleteGoalHandler} goal={goal} />;
 					}}
 				/>
 			</View>
